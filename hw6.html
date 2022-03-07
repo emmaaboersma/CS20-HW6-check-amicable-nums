@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Amicable Numbers</title>
+        <script language="javascript">
+            window.onload = function () {
+                b = document.getElementById("btn");
+                // console.log("button: " + button);
+                b.addEventListener("click", validate);
+                // b.onclick = validate();
+            }
+            
+            function validate() {
+                // console.log("Hi");
+                // input1 = document.getElementById("input1").value;
+                // input2 = document.getElementById("input2").value;
+
+                input1 = document.form.input1.value;
+                input2 = document.form.input2.value;
+
+                console.log("input1: " + input1);
+                console.log("input2: " + input2);
+
+                input1 = parseInt(input1);
+                input2 = parseInt(input2);
+
+
+                console.log("input1: " + input1);
+                console.log("input2: " + input2);
+
+                result = document.getElementById("result");
+
+                factors1 = get_factors(input1);
+                factors2 = get_factors(input2);
+
+                total1 = add_factors(factors1);
+                total2 = add_factors(factors2);
+
+                amicable = false;
+
+                if (total1 == input2 && total2 == input1) {
+                    result.innerHTML = "The numbers " + input1 + " and " + input2 + " are amicable.<br>";
+                    document.getElementById("factors1").innerHTML = "input1 factors: " + factors1;
+                    document.getElementById("factors2").innerHTML = "input2 factors: " + factors2;
+                    amicable = true;
+                    console.log("amicable: " + amicable);
+                } else {
+                    result.innerHTML = "The numbers " + input1 + " and " + input2 + " are not amicable.<br>";
+                    document.getElementById("factors1").innerHTML = "input1 factors: " + factors1;
+                    document.getElementById("factors2").innerHTML = "input2 factors: " + factors2;
+                }
+
+                return amicable;
+
+            }
+            
+            function get_factors(num) {
+                factors = [];
+                count = 0;
+                for(let i = 1; i <= num; i++) {
+                    if (i != num) {
+                        if (num % i == 0) {
+                        
+                        factors[count] = i;
+                        count++;
+                        }
+                    }
+                    
+                }
+                return factors;
+            }
+
+            function add_factors(f) {
+
+                total = 0;
+
+                for(let i = 0; i < f.length; i++) {
+                    total += f[i];
+                }
+                console.log("total: " + total);
+                return total;
+            }
+
+
+        </script>
+    </head>
+    <body>
+        <form name="form">
+            <input type="text" name="input1" placeholder="input1">
+            <input type="text" name="input2" placeholder="input2">
+            
+            <input type="button" value="submit" class="btn" id="btn">
+        </form>
+        
+        <div class="result" id="result"></div>
+        <div class="factors1" id="factors1"></div>
+        <div class="factors2" id="factors2"></div>
+
+    </body>
+</html>
